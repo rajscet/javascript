@@ -3870,3 +3870,101 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 We encourage you to fork this guide and change the rules to fit your team’s style guide. Below, you may list some amendments to the style guide. This allows you to periodically update your style guide without having to deal with merge conflicts.
 
 # };
+
+
+Containers & Components
+Container file:
+src/containers/ModuleNameView.js
+Component files:
+src/components/module-name-view
+ - index.js
+ - Main.js
+ - Header.js
+ - ...
+ - img
+   - icon@2x.png
+   - icon@3x.png
+Event name:
+handleEventName = ()=>{//todo}
+...
+<MyComponent onEventName={this.handleEventName}/>
+Render methods:
+  renderMethodName = () => {
+   //todo
+  }
+  render() {
+    return (
+      <View>
+        {this.renderMethodName()}
+      </View>
+    );
+  }
+`
+mapStateToProps & mapDispatchToProps
+function mapStateToProps(state) {
+  return {
+    todos: state.todos
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(Actions, dispatch)
+  }
+}
+actions src/actions
+index.js
+todos.js
+navigation.js
+src/constants/ActionTypes.js
+export const SWITCH_MAIN_TAB = 'SWITCH_MAIN_TAB';
+```src/actions/todos.js````
+import * as types from '../constants/ActionTypes'
+
+export function addTodo(title, hour) {
+  return {type: types.ADD_TODO, title, hour}
+}
+reducerssrc/reducers
+index.js
+todos.js
+navigation.js
+src/reducers/todos.js
+import { ADD_TODO, DELETE_TODO, EDIT_TODO, COMPLETE_TODO } from '../constants/ActionTypes'
+const initialState = []
+
+export default function todos(state = initialState, action) {
+  switch (action.type) {
+    case ADD_TODO:
+      //todo
+    default:
+      return state
+  }
+}
+stylessrc/styles
+index.js
+Basic.js
+Theme.js
+src/styles/Basic.js
+import { StyleSheet, Dimensions } from 'react-native';
+let winSize = Dimensions.get('window');
+const Basic = StyleSheet.create({
+  text: {
+    fontSize: 32/winSize.scale
+  }
+});
+export default Basic;
+src/styles/Theme.js
+//colors
+const color = {
+  green: '#00551e',
+  brown: '#693504',
+  red: '#db2828'
+}
+
+//other
+const active = {
+  opacity: 0.6
+}
+
+export default {color, active}
+import {Theme, BasicStyle} from '../../styles';
